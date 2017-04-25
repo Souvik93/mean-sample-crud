@@ -7,7 +7,8 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 var db
 app.set('view engine', 'ejs');
-MongoClient.connect('mongodb://localhost:27017/exampleDb', (err, database) => {
+//mongodb://localhost:27017/exampleDb
+MongoClient.connect('mongo ds117271.mlab.com:17271/souvik -u souvik -p password database) => {
   if (err) return console.log(err)
   db = database
   app.listen(3000, () => {
