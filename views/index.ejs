@@ -1,0 +1,91 @@
+<html>
+<head>
+	<script>
+	
+	//var update = document.getElementById('update')
+
+/*update.addEventListener('click', function () {
+  fetch('quotes', {
+    method: 'put',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      'name': 'Darth Vader',
+      'quote': 'I find your lack of faith disturbing.'
+    })
+  })
+  .then(response => {
+    if (response.ok) return response.json()
+  })
+  .then(data => {
+    console.log(data)
+  })
+})
+	*/
+		var update=function(){
+			//console.log("Hello my world");
+			fetch('quotes', {
+    method: 'put',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      'name': 'Darth Vader',
+      'quote': 'I find your lack of faith disturbing.'
+    })
+  })
+  .then(response => {
+    if (response.ok) return response.json()
+  })
+  .then(data => {
+    console.log(data)
+  })
+		};
+		
+		var deleteFunc=function(){
+			
+			  fetch('quotes', {
+    method: 'delete',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'name': 'Darth Vader'
+    })
+  }).then(function (response) {
+    window.location.reload()
+  })
+			
+		}
+		
+		
+	</script>
+</head>
+
+<body>
+	<h5>My first MEAN app....</h5>
+	<h6><li>Back End and Front End- Javascript</li></h6>
+	<h6><li>Database- Mongo DB</li></h6>
+	<h6><li>Server- Express</li></h6>
+	<h6><li>Node.js</li></h6>
+	
+<ul class="quotes">
+  <% for(var i=0; i<quotes.length; i++) {%>
+    <li class="quote">
+      <span><%= quotes[i].name %></span>
+      <span><%= quotes[i].quote %></span>
+    </li>
+  <% } %>
+</ul>
+ <form action="/quotes" method="POST">
+    <input type="text" placeholder="name" name="name">
+    <input type="text" placeholder="quote" name="quote">
+    <button type="submit">Submit</button>
+  </form>		
+<div>
+  <h2>Replace last quote written by Master Yoda with a quote written by Darth Vadar</h2>
+  <button id="update" onclick="update()"> Darth Vadar invades! </button>
+</div>
+	<div>
+  <h2>Delete Darth Vadar's first quote</h2>
+  <button id="delete" onclick="deleteFunc()"> Delete first Darth Vadar quote </button>
+</div>
+</body>
+</html>
