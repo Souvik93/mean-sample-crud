@@ -5,13 +5,16 @@ const MongoClient = require('mongodb').MongoClient
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(bodyParser.json());
+//var port_number = server.listen(process.env.PORT || 3000);
+//app.listen(port_number);
 var db
 app.set('view engine', 'ejs');
 //mongodb://localhost:27017/exampleDb
-MongoClient.connect('mongodb://souvik:password@ds117271.mlab.com:17271/souvik', (err, database) => {
+//mongodb://souvik:password@ds117271.mlab.com:17271/souvik
+MongoClient.connect('mongodb://localhost:27017/exampleDb', (err, database) => {
   if (err) return console.log(err)
   db = database
-  app.listen(3000, () => {
+  app.listen(process.env.PORT || 3000,() => {
     console.log('listening on 3000')
   })
 })

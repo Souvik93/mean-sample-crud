@@ -1,3 +1,4 @@
+/*
 var update = document.getElementById('update')
 
 update.addEventListener('click', function () {
@@ -16,3 +17,4 @@ update.addEventListener('click', function () {
     console.log(data)
   })
 })
+*/
