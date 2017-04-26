@@ -19,6 +19,9 @@ MongoClient.connect('mongodb://souvik:password@ds117271.mlab.com:17271/souvik', 
   })
 })
 app.post('/quotes', (req, res) => {
+	var d = new Date("2011-04-20");
+	
+	req.body.Cdate=d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear();
   db.collection('quotes').save(req.body, (err, result) => {
     if (err) return console.log(err)
 

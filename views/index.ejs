@@ -3,6 +3,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 	<script>
 	
 	//var update = document.getElementById('update')
@@ -24,6 +25,7 @@
   })
 })
 	*/
+		//document.getElementById('updateA').style.display == 'none';
 		var update=function(){
 			//console.log("Hello my world");
 			var x = document.getElementById("updateText").value;
@@ -63,6 +65,7 @@
 	</script>
 	
 	<style>
+		@import url(http://fonts.googleapis.com/css?family=Satisfy);
 	/*@import url(http://fonts.googleapis.com/css?family=Satisfy);
 		.quote-container {
   margin-top: 50px;
@@ -151,7 +154,8 @@
 }*/
 		
 		
-body{margin-top:20px;}
+body{margin-top:20px;
+	}
 
 ul.notes li {
   margin: 10px 40px 50px 0px;
@@ -218,7 +222,10 @@ ul.notes li div {
   -webkit-transition: -webkit-transform 0.15s linear;
 }
 
-
+.timeColor
+		{
+			color:black;
+		}
 
 	</style>
 </head>
@@ -270,19 +277,39 @@ ul.notes li div {
 				
                 <div class="rotate-2 red-bg">
 <!--                    <small>12:03:28 12-04-2014</small>-->
-                    <span><blockquote><%= quotes[i].quote %>
+					
+					
+                    <span><blockquote>
+						
+						
+						
+						<%= quotes[i].quote %>
 			
-			<footer>By <span><%= quotes[i].name %></span> </footer>
+			<footer>By <span><%= quotes[i].name %> 
+				
+				<br> <span  class="timeColor"> (<%= quotes[i].Cdate %>) </span>
+				
+				</span> 
+						
+										
+
+						
+						
+						</footer>
 			
 			</blockquote></span>
                 </div>
 				<% } %>
 				<%if (i%2==1) { %>
 				 <div class="rotate-1 yellow-bg">
-<!--                    <small>12:03:28 12-04-2014</small>-->
+                    
                     <span><blockquote><%= quotes[i].quote %>
 			
-			<footer>By <span><%= quotes[i].name %></span> </footer>
+			<footer>By <span><%= quotes[i].name %></span>
+					<br> (<%= quotes[i].Cdate %>) 
+						
+						
+						</footer>
 			
 			</blockquote></span>
                 </div>
@@ -321,9 +348,16 @@ ul.notes li div {
 <h4><span class="label label-success">Update Quote</span></h4>
 		
 	<div class="form-group"><input type="text" id="updateText" placeholder="Please provide the name...." class="form-control" required></div>
-	<div class="form-group"><input type="text" id="updateQuote" placeholder="Please provide the Quote...." class="form-control" required></div>
+	<div class="form-group"><textarea type="text" id="updateQuote" placeholder="Please provide the new Quote...." class="form-control" required></textarea></div>
 	
   <button id="update" onclick="update()" class="btn btn-primary"> Update Your Quote Now</button>
+	
+	<!--<div class="alert alert-success" id="updateA">
+    <strong>Success!</strong> This alert box could indicate a successful or positive action.
+  </div>-->
+	
+	
+	
 </div>
 			<hr>
 	<div>
