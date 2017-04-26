@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 
 app.put('/quotes', (req, res) => {
   db.collection('quotes')
-  .findOneAndUpdate({name: 'Souvik'}, {
+  .findOneAndUpdate({name: req.body.name}, {
     $set: {
       name: req.body.name,
       quote: req.body.quote

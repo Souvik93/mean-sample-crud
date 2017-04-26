@@ -1,5 +1,8 @@
 <html>
 <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script>
 	
 	//var update = document.getElementById('update')
@@ -23,23 +26,26 @@
 	*/
 		var update=function(){
 			//console.log("Hello my world");
+			var x = document.getElementById("updateText").value;
+			var y = document.getElementById("updateQuote").value;
 			fetch('quotes', {
     method: 'put',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
-      'name': 'Darth Vader',
-      'quote': 'I find your lack of faith disturbing.'
+      'name': x,
+      'quote': y
     })
   })
   .then(response => {
     if (response.ok) return response.json()
   })
   .then(data => {
-    console.log(data)
+    window.location.reload();
   })
 		};
 		
 		var deleteFunc=function(){
+			var y = document.getElementById("deleteText").value;
 			
 			  fetch('quotes', {
     method: 'delete',
@@ -47,7 +53,7 @@
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      'name': 'Darth Vader'
+      'name': y
     })
   }).then(function (response) {
     window.location.reload()
@@ -58,32 +64,81 @@
 </head>
 
 <body>
-	<h5>My first MEAN app.....</h5>
-	<h6><li>Back End and Front End- Javascript</li></h6>
-	<h6><li>Database- Mongo DB</li></h6>
-	<h6><li>Server- Express</li></h6>
-	<h6><li>Node.js</li></h6>
 	
-<ul class="quotes">
+	<div class="container">
+	
+	<div class="row">
+		
+		<div class="col-md-12">
+		
+		<h2><span class="label label-default">My first MEAN Stack App (Souvik).....</span></h2>
+			
+			<div class="col-md-3"><h6><li><span  class="label label-info">Back End and Front End- Javascript</span></li></h6></div>
+			<div class="col-md-3"><h6><li><span  class="label label-info">Database- MongoDb</span></li></h6></div>
+			<div class="col-md-3"><h6><li><span  class="label label-info">Server- Express</span></li></h6></div>
+			<div class="col-md-3"><h6><li><span  class="label label-info">Node.js</span></li></h6></div>
+		</div>
+		
+		
+	<div class="col-md-6">
+			<h4><span class="label label-success">Quotes fetched from database</span></h4>
+		
+		<ul class="list-group">
   <% for(var i=0; i<quotes.length; i++) {%>
-    <li class="quote">
-      <span><%= quotes[i].name %></span>
-      <span><%= quotes[i].quote %></span>
+    <li class="list-group-item list-group-item-default">
+      
+		<span><blockquote><%= quotes[i].quote %>
+			
+			<footer>By <span><%= quotes[i].name %></span> </footer>
+			
+			</blockquote></span>
     </li>
   <% } %>
-</ul>
- <form action="/quotes" method="POST">
-    <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="quote" name="quote">
-    <button type="submit">Submit</button>
-  </form>		
+</ul>		
+		</div>
+		
+		
+		<div class="col-md-6">
+			
+			<h4><span class="label label-warning">Add New Quote</span></h4>
+		
+<form action="/quotes" method="POST">
+	<div class="form-group"><input type="text" placeholder="name" name="name" class="form-control" required> </div>
+    <div class="form-group">
+	<input type="text" placeholder="quote" name="quote" class="form-control" required>
+	</div>
+    
+    <button type="submit" class="btn btn-info">Submit</button>
+  </form>	
+			<hr>
 <div>
-  <h2>Replace last quote written by Master Yoda with a quote written by Darth Vadar</h2>
-  <button id="update" onclick="update()"> Darth Vadar invades! </button>
+<h4><span class="label label-success">Update Quote</span></h4>
+		
+	<div class="form-group"><input type="text" id="updateText" placeholder="Please provide the name...." class="form-control" required></div>
+	<div class="form-group"><input type="text" id="updateQuote" placeholder="Please provide the Quote...." class="form-control" required></div>
+	
+  <button id="update" onclick="update()" class="btn btn-primary"> Update Your Quote Now</button>
 </div>
+			<hr>
 	<div>
-  <h2>Delete Darth Vadar's first quote</h2>
-  <button id="delete" onclick="deleteFunc()"> Delete first Darth Vadar quote </button>
+  <h4><span class="label label-danger">Delete Quote</span></h4>
+		<div class="form-group"><input type="text" id="deleteText" placeholder="Please provide the name...." class="form-control" required></div>
+  <button id="delete" onclick="deleteFunc()" class="btn btn-danger"> Delete Quote </button>
 </div>
+		
+		
+		
+		</div>
+		
+ 		
+		
+		
+		</div>
+	
+	
+	</div>
+	
+	
+	
 </body>
 </html>
