@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 })
 
 app.put('/quotes', (req, res) => {
-	var d = new Date("2011-04-20");
+	var d = new Date();
 	req.body.Cdate=d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear();
   db.collection('quotes')
   .findOneAndUpdate({name: req.body.name}, {
