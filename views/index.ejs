@@ -241,6 +241,7 @@ ul.notes li div {
 				 <div class="rotate-1 yellow-bg">
                     
                     <span><blockquote>
+						<%= quotes[i].quote %>
 			<footer>By <span><%= quotes[i].name %></span> (<%= quotes[i].Cdate %>) <a class="fa fa-thumbs-up" onclick="ul('<%= quotes[i]._id %>', <%=quotes[i].likes %>, '<%=quotes[i].quote %>', '<%=quotes[i].name %>')"><%= quotes[i].likes %></a> 
 						</footer>
 			</blockquote></span>
