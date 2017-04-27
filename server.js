@@ -23,7 +23,7 @@ app.post('/quotes', (req, res) => {
 	var month=parseInt(d.getMonth())+1;
 	req.body.Cdate=d.getDate()+"-"+month+"-"+d.getFullYear();
 	req.body.likes=0;
-  db.collection('Lquotes').save(req.body, (err, result) => {
+  db.collection('quotes').save(req.body, (err, result) => {
     if (err) return console.log(err)
 
     console.log('saved to database')
