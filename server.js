@@ -11,7 +11,7 @@ var db
 app.set('view engine', 'ejs');
 //mongodb://localhost:27017/exampleDb
 //mongodb://souvik:password@ds117271.mlab.com:17271/souvik
-MongoClient.connect('mongodb://souvik:password@ds117271.mlab.com:17271/souvik', (err, database) => {
+MongoClient.connect('mongodb://localhost:27017/exampleDb', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000,() => {
@@ -19,8 +19,9 @@ MongoClient.connect('mongodb://souvik:password@ds117271.mlab.com:17271/souvik', 
   })
 })
 app.post('/quotes', (req, res) => {
-	var d = new Date("2011-04-20");
-	req.body.Cdate=d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear();
+	var d = new Date();
+	var month=parseInt(d.getMonth())+1;
+	req.body.Cdate=d.getDate()+"-"+month+"-"+d.getFullYear();
   db.collection('quotes').save(req.body, (err, result) => {
     if (err) return console.log(err)
 
@@ -48,7 +49,8 @@ app.get('/', (req, res) => {
 
 app.put('/quotes', (req, res) => {
 	var d = new Date();
-	req.body.Cdate=d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear();
+	var month=parseInt(d.getMonth())+1;
+	req.body.Cdate=d.getDate()+"-"+month+"-"+d.getFullYear();
   db.collection('quotes')
   .findOneAndUpdate({name: req.body.name}, {
     $set: {
@@ -69,6 +71,6 @@ app.delete('/quotes', (req, res) => {
   db.collection('quotes').findOneAndDelete({name: req.body.name},
   (err, result) => {
     if (err) return res.send(500, err)
-    res.send('A darth vadar quote got deleted')
+    res.send('Quote got deleted')
   })
 })
