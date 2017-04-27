@@ -4,8 +4,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script>
-	
 	//var update = document.getElementById('update')
 
 /*update.addEventListener('click', function () {
@@ -60,6 +60,31 @@
   }).then(function (response) {
     window.location.reload()
   })	
+		}
+		
+		
+		
+		var ul=function(id,likes,quote,name)
+		{
+			//var x = document.getElementById("Souvik").value;
+			//alert(id+likes);
+			fetch('likes', {
+    method: 'put',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      '_id': id,
+	  'name':name,
+	  'quote':quote,
+      'likes': likes
+    })
+  })
+  .then(response => {
+    if (response.ok) return response.json()
+  })
+  .then(data => {
+	//console.log(data);
+    window.location.reload();
+  })
 		}
 		
 	</script>
@@ -200,22 +225,13 @@ ul.notes li div {
 			
 			<% for(var i=0; i<quotes.length; i=i+1) {%>
             <li>
-				
-				
-				
-				<%if (i%2==0) { %>
-				
-				
+				<%if (i%2==0) { %>		
                 <div class="rotate-2 red-bg">
 <!--                    <small>12:03:28 12-04-2014</small>-->
                     <span><blockquote>						
 						<%= quotes[i].quote %>
 			
-			<footer>By <span><%= quotes[i].name %> 
-				 <span  class="timeColor"> (<%= quotes[i].Cdate %>) </span>
-				
-				</span> 
-
+			<footer>By <span><%= quotes[i].name %></span> (<%= quotes[i].Cdate %>) <a class="fa fa-thumbs-up" onclick="ul('<%= quotes[i]._id %>', <%=quotes[i].likes %>, '<%=quotes[i].quote %>', '<%=quotes[i].name %>')"><%= quotes[i].likes %></a> 
 						</footer>
 			
 			</blockquote></span>
@@ -224,36 +240,21 @@ ul.notes li div {
 				<%if (i%2==1) { %>
 				 <div class="rotate-1 yellow-bg">
                     
-                    <span><blockquote><%= quotes[i].quote %>
-			
-			<footer>By <span><%= quotes[i].name %></span> (<%= quotes[i].Cdate %>) 
-						
-						
+                    <span><blockquote>
+			<footer>By <span><%= quotes[i].name %></span> (<%= quotes[i].Cdate %>) <a class="fa fa-thumbs-up" onclick="ul('<%= quotes[i]._id %>', <%=quotes[i].likes %>, '<%=quotes[i].quote %>', '<%=quotes[i].name %>')"><%= quotes[i].likes %></a> 
 						</footer>
-			
 			</blockquote></span>
                 </div>
-				
-				<% } %>
-				
-				
-				
+				<% } %>	
             </li>
-			 <% } %>
-			
-               
+			 <% } %>               
 		</ul>  
 	</div>
 </div>
-		
-		</div>
-		
-		
+		</div>	
 		<div class="col-md-3">
 			<div class="well">
-			
 			<h4><span class="label label-warning">Add New Quote</span></h4>
-		
 <form action="/quotes" method="POST">
 	<div class="form-group"><input type="text" placeholder="name" name="name" class="form-control" required> </div>
     <div class="form-group">
@@ -281,26 +282,17 @@ ul.notes li div {
 	
 	
 	
-</div>
-			
+</div>		
 	<div class="well">
   <h4><span class="label label-danger">Delete Quote</span></h4>
 		<div class="form-group"><input type="text" id="deleteText" placeholder="Please provide the name...." class="form-control" required></div>
   <button id="delete" onclick="deleteFunc()" class="btn btn-danger"> Delete Quote </button>
 </div>
-		
-		
-		
+		</div>		
 		</div>
-		
- 		
-		
-		
-		</div>
-	
 	<div class="well"><footer>
   <p>Developed by: Souvik</p>
-  <p>Contact information: <a href="mailto:someone@example.com">souvik.das@live.in</a>.</p>
+  <p>Contact information: <a href="mailto:souvik.das@live.in">souvik.das@live.in</a>.</p>
 </footer></div>
 	</div>
 </body>

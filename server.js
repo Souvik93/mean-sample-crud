@@ -11,7 +11,7 @@ var db
 app.set('view engine', 'ejs');
 //mongodb://localhost:27017/exampleDb
 //mongodb://souvik:password@ds117271.mlab.com:17271/souvik
-MongoClient.connect('mongodb://souvik:password@ds117271.mlab.com:17271/souvik', (err, database) => {
+MongoClient.connect('mongodb://localhost:27017/exampleDb', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000,() => {
@@ -22,7 +22,8 @@ app.post('/quotes', (req, res) => {
 	var d = new Date();
 	var month=parseInt(d.getMonth())+1;
 	req.body.Cdate=d.getDate()+"-"+month+"-"+d.getFullYear();
-  db.collection('quotes').save(req.body, (err, result) => {
+	req.body.likes=0;
+  db.collection('Lquotes').save(req.body, (err, result) => {
     if (err) return console.log(err)
 
     console.log('saved to database')
@@ -41,7 +42,7 @@ app.post('/quotes', (req, res) => {
 })*/
 
 app.get('/', (req, res) => {
-  db.collection('quotes').find().toArray((err, result) => {
+  db.collection('Lquotes').find().toArray((err, result) => {
     if (err) return console.log(err)
     res.render('index.ejs', {quotes: result})
   })
@@ -50,8 +51,8 @@ app.get('/', (req, res) => {
 app.put('/quotes', (req, res) => {
 	var d = new Date();
 	var month=parseInt(d.getMonth())+1;
-	req.body.Cdate=d.getDate()+"-"+month+"-"+d.getFullYear();
-  db.collection('quotes')
+	req.body.Cdate=d.getDate()+"-"+month+"-"+d.getFullYear();	
+	db.collection('Lquotes')
   .findOneAndUpdate({name: req.body.name}, {
     $set: {
       name: req.body.name,
@@ -68,9 +69,60 @@ app.put('/quotes', (req, res) => {
 })
 
 app.delete('/quotes', (req, res) => {
-  db.collection('quotes').findOneAndDelete({name: req.body.name},
+  db.collection('Lquotes').findOneAndDelete({name: req.body.name},
   (err, result) => {
     if (err) return res.send(500, err)
     res.send('Quote got deleted')
   })
+})
+
+app.put('/likes', (req, res) => {
+	var newLikes;
+	//var i=db.collection('quotes').findOne({name: 'Souvik'})
+	console.log(req.body._id);
+	console.log(req.body.likes);
+	
+	db.collection('Lquotes').findOne({name: req.body.name},
+  (err, result) => {
+    if (err) return res.send(500, err)
+	
+	newLikes=result;
+		console.log(newLikes);
+    //res.send('Quote got deleted')
+  })
+	
+	db.collection('Lquotes').update({name: req.body.name},{$set:{likes:req.body.likes+1}},
+  (err, result) => {
+    if (err) return res.send(500, err)
+	
+	console.log(result);
+	res.send(result)
+	//newLikes=result;
+    //res.send('Quote got deleted')
+  })
+	
+//	db.Lquotes.update({_id:req.body._id}, {$set:{likes:newLikes.likes+1}}, function(err, result) {
+//    if (err)
+//		return res.send(err)
+//	
+//     //do something.
+//		console.log(result);
+//	res.send(result)
+
+	
+/*	db.collection('Lquotes')
+  .findOneAndUpdate({_id:req.body._id}, {
+    $set: {
+      _id: req.body._id,
+      //quote: req.body.quote,
+	  likes: req.body.likes+1
+    }
+  }, (err, result) => {
+    if (err) return res.send(err)
+    
+	console.log(result);
+	res.send(result)
+  })*/
+	
+  
 })
