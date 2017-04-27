@@ -11,7 +11,7 @@ var db
 app.set('view engine', 'ejs');
 //mongodb://localhost:27017/exampleDb
 //mongodb://souvik:password@ds117271.mlab.com:17271/souvik
-MongoClient.connect('mongodb://localhost:27017/exampleDb', (err, database) => {
+MongoClient.connect('mongodb://souvik:password@ds117271.mlab.com:17271/souvik', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000,() => {
@@ -42,7 +42,7 @@ app.post('/quotes', (req, res) => {
 })*/
 
 app.get('/', (req, res) => {
-  db.collection('Lquotes').find().toArray((err, result) => {
+  db.collection('quotes').find().toArray((err, result) => {
     if (err) return console.log(err)
     res.render('index.ejs', {quotes: result})
   })
@@ -52,7 +52,7 @@ app.put('/quotes', (req, res) => {
 	var d = new Date();
 	var month=parseInt(d.getMonth())+1;
 	req.body.Cdate=d.getDate()+"-"+month+"-"+d.getFullYear();	
-	db.collection('Lquotes')
+	db.collection('quotes')
   .findOneAndUpdate({name: req.body.name}, {
     $set: {
       name: req.body.name,
@@ -69,7 +69,7 @@ app.put('/quotes', (req, res) => {
 })
 
 app.delete('/quotes', (req, res) => {
-  db.collection('Lquotes').findOneAndDelete({name: req.body.name},
+  db.collection('quotes').findOneAndDelete({name: req.body.name},
   (err, result) => {
     if (err) return res.send(500, err)
     res.send('Quote got deleted')
@@ -82,7 +82,7 @@ app.put('/likes', (req, res) => {
 	console.log(req.body._id);
 	console.log(req.body.likes);
 	
-	db.collection('Lquotes').findOne({name: req.body.name},
+	db.collection('quotes').findOne({name: req.body.name},
   (err, result) => {
     if (err) return res.send(500, err)
 	
@@ -91,7 +91,7 @@ app.put('/likes', (req, res) => {
     //res.send('Quote got deleted')
   })
 	
-	db.collection('Lquotes').update({name: req.body.name},{$set:{likes:req.body.likes+1}},
+	db.collection('quotes').update({name: req.body.name},{$set:{likes:req.body.likes+1}},
   (err, result) => {
     if (err) return res.send(500, err)
 	
