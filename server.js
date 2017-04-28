@@ -5,13 +5,11 @@ const MongoClient = require('mongodb').MongoClient
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(bodyParser.json());
-//var port_number = server.listen(process.env.PORT || 3000);
-//app.listen(port_number);
 var db
 app.set('view engine', 'ejs');
 //mongodb://localhost:27017/exampleDb
 //mongodb://souvik:password@ds117271.mlab.com:17271/souvik
-MongoClient.connect('mongodb://souvik:password@ds117271.mlab.com:17271/souvik', (err, database) => {
+MongoClient.connect('mongodb://localhost:27017/exampleDb', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000,() => {
@@ -100,29 +98,7 @@ app.put('/likes', (req, res) => {
 	//newLikes=result;
     //res.send('Quote got deleted')
   })
-	
-//	db.Lquotes.update({_id:req.body._id}, {$set:{likes:newLikes.likes+1}}, function(err, result) {
-//    if (err)
-//		return res.send(err)
-//	
-//     //do something.
-//		console.log(result);
-//	res.send(result)
 
-	
-/*	db.collection('Lquotes')
-  .findOneAndUpdate({_id:req.body._id}, {
-    $set: {
-      _id: req.body._id,
-      //quote: req.body.quote,
-	  likes: req.body.likes+1
-    }
-  }, (err, result) => {
-    if (err) return res.send(err)
-    
-	console.log(result);
-	res.send(result)
-  })*/
 	
   
 })

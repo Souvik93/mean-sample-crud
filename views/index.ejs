@@ -73,7 +73,6 @@
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       '_id': id,
-	  'name':name,
 	  'quote':quote,
       'likes': likes
     })
@@ -203,7 +202,7 @@ ul.notes li div {
 		</div>
 		
 		
-	<div class="col-md-9">
+	<div class="col-md-9 col-xs-7">
 			<h4><span class="label label-success display-4">Quotes fetched from database</span></h4>
 		<!--
 		<ul class="list-group">
@@ -220,7 +219,7 @@ ul.notes li div {
 </ul>	
 	-->
 		<div class="bootstrap snippet">
-    <div class="row">
+    
     	<ul class="notes">
 			
 			<% for(var i=0; i<quotes.length; i=i+1) {%>
@@ -231,29 +230,31 @@ ul.notes li div {
                     <span><blockquote>						
 						<%= quotes[i].quote %>
 			
-			<footer>By <span><%= quotes[i].name %></span> (<%= quotes[i].Cdate %>) <a class="fa fa-thumbs-up" onclick="ul('<%= quotes[i]._id %>', <%=quotes[i].likes %>, '<%=quotes[i].quote %>', '<%=quotes[i].name %>')"><%= quotes[i].likes %></a> 
+			<footer>By <span><%= quotes[i].name %></span> (<%= quotes[i].Cdate %>) <a class="fa fa-thumbs-up" onclick="ul('<%= quotes[i]._id %>', <%=quotes[i].likes %>, '<%=quotes[i].quote %>')"><%= quotes[i].likes %></a> 
 						</footer>
 			
 			</blockquote></span>
                 </div>
 				<% } %>
 				<%if (i%2==1) { %>
-				 <div class="rotate-1 yellow-bg">
+				
+				 <div class="rotate-1 yellow-bg ">
                     
                     <span><blockquote>
 						<%= quotes[i].quote %>
-			<footer>By <span><%= quotes[i].name %></span> (<%= quotes[i].Cdate %>) <a class="fa fa-thumbs-up" onclick="ul('<%= quotes[i]._id %>', <%=quotes[i].likes %>, '<%=quotes[i].quote %>', '<%=quotes[i].name %>')"><%= quotes[i].likes %></a> 
+			<footer>By <span><%= quotes[i].name %></span> (<%= quotes[i].Cdate %>) <a class="fa fa-thumbs-up" onclick="ul('<%= quotes[i]._id %>', <%=quotes[i].likes %>, '<%=quotes[i].quote %>')"><%= quotes[i].likes %></a> 
 						</footer>
 			</blockquote></span>
                 </div>
+				
 				<% } %>	
             </li>
 			 <% } %>               
 		</ul>  
-	</div>
+	
 </div>
 		</div>	
-		<div class="col-md-3">
+		<div class="col-md-3 col-sm-6 col-xs-5">
 			<div class="well">
 			<h4><span class="label label-warning">Add New Quote</span></h4>
 <form action="/quotes" method="POST">
@@ -275,7 +276,7 @@ ul.notes li div {
 	<div class="form-group"><input type="text" id="updateText" placeholder="Please provide the name...." class="form-control" required></div>
 	<div class="form-group"><textarea type="text" id="updateQuote" placeholder="Please provide the new Quote...." class="form-control" required></textarea></div>
 	
-  <button id="update" onclick="update()" class="btn btn-primary"> Update Your Quote Now</button>
+  <button id="update" onclick="update()" class="btn btn-primary"> Update </button>
 	
 	<!--<div class="alert alert-success" id="updateA">
     <strong>Success!</strong> This alert box could indicate a successful or positive action.
