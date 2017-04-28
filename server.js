@@ -9,7 +9,7 @@ var db
 app.set('view engine', 'ejs');
 //mongodb://localhost:27017/exampleDb
 //mongodb://souvik:password@ds117271.mlab.com:17271/souvik
-MongoClient.connect('mongodb://localhost:27017/exampleDb', (err, database) => {
+MongoClient.connect('mongodb://souvik:password@ds117271.mlab.com:17271/souvik', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000,() => {
